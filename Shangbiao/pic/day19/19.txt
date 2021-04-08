@@ -1,0 +1,203 @@
+前情回顾
+
+1. 软件项目开发流程
+
+   需求文档  概要设计文档
+   详细设计文档   测试文档  软件说明文档
+
+   甘特图  思维导图  流程图
+
+2. GIT
+
+   概要介绍: 开源  分布式  代码管理
+
+   git基本命令: git add
+               git commit
+               git rm    git mv
+               git status
+               git log
+               git checkout
+
+   版本控制 :  git reset
+              git reflog
+              git  tag
+
+   保存工作区 : git stash
+
+   分支管理 :  git branch
+              git checkout
+              git merge
+
+在线词典
+
+1. 需求的分析
+
+    客户单角度,怎么使用这个软件
+
+
+2. 技术分析
+
+    网络:  tcp
+    并发:  多进程
+    两个界面怎么相互跳转: demo.py
+    数据表怎么设计 :  dict --> words
+
+        words --> id   word   mean
+
+        user : id   name   passwd
+
+        create table user (
+        id int primary key auto_increment,
+        name varchar(32) not null,
+        passwd char(64) not null);
+
+        history :id   word  time  user_id
+
+        create table hist (
+        id int primary key auto_increment,
+        word varchar(30),
+        time datetime default now(),
+        user_id int,
+        foreign key (user_id) references user(id)
+        );
+
+
+3. 功能模块划分
+
+   分几个功能 ?
+
+   登录  注册   查询单词  历史记录
+
+
+   封装-->  分模块 --> MVC
+
+   M--> 数据模型
+   V--> 视图
+   C--> 业务逻辑控制
+
+4. 通信协议
+
+              请求类型     数据参数
+
+  注册          R        name passwd
+
+  登录          L        name passwd
+
+  查单词        Q        word
+
+  获取历史记录   H        name
+
+  退出          E
+
+5. 分功能设计具体逻辑
+
+   网络通信框架
+
+   注册
+
+      客户端 : 输入用户名密码
+              发送请求
+              等待客户端反馈
+              Yes --> 注册成功
+              No  --> 注册失败 停留在一级界面
+
+      服务端 : 接收请求,简单解析
+              判断可否注册
+              反馈结果
+              yes --> 插入数据库
+              No -->
+
+
+   登录
+
+   查询单词
+
+   历史记录
+
+
+作业 : 1. 完成 在线词典的代码
+      2. 二阶段内容总结
+
+
+Linux 总结
+
+1. Linux基本理论 ：
+   系统构成  每部分的作用  特点和使用场景
+
+2. Linux文件系统结构  绝对路径相对路径
+
+3. Linux的常用命令  （鸟哥私房菜  菜鸟教程）
+
+4. 压缩解压  用户创建  远程访问  软件安装  vi基本使用
+
+* 能够熟练使用Linux操作系统，完成项目部署和基本维护
+
+数据管理 ：
+
+1. 文件处理
+
+   * 文件读写操作： open() read() write() close()
+   * 正则表达式： 提取匹配文本内容
+   程序 ： 学生管理系统
+
+2. 数据库
+
+   mysql 中sql语句的基本使用   重点
+
+      * 建库建表
+      * 增删改查
+      * 高级查询，索引，聚合
+      * 表关系建立，外键，连接查询
+
+   存储过程  事务  视图  优化
+
+   pymysql 使用
+
+网络并发总结
+
+1. 网络编程
+
+   * 网络基础概念: OSI tcp/ip  三次握手四次回收
+                 ip  端口  首部  网络传输
+                 公网  内网
+
+   * udp 编程 (重点)
+
+   * tcp 编程 (重点)
+
+   * HTTP协议   请求响应
+
+2. 多任务编程
+
+   进程 : 进程概念   创建进程  自定义进程类
+         进程池  消息队列
+
+   线程 : 创建线程  同步互斥  GIL   进程线程对比
+
+3. 并发网络模型
+
+   多进程多线程的并发
+
+   IO并发模型
+
+      概念: IO  阻塞IO  非阻塞IO
+
+      IO多路复用 : select  epoll
+
+代码训练: 群聊聊天室  ftp文件服务   webserver 在线词典
+
+    * 思考方法 : 每个功能独立的列逻辑
+                在使用角度去决定类的编写模型
+
+    * 总分的请求处理模型
+      自定义简单的通信协议
+      请求应答情况分类讨论
+
+图书 :  核心编程 第三版
+
+
+
+
+
+
+
